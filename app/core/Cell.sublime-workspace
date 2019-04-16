@@ -1,0 +1,235 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"feature",
+				"featureAllowed"
+			],
+			[
+				"rand",
+				"randomFeat"
+			],
+			[
+				"fea",
+				"feature"
+			],
+			[
+				"bon",
+				"bonusList"
+			],
+			[
+				"featu",
+				"featuresList"
+			],
+			[
+				"add",
+				"addFeature"
+			],
+			[
+				"w",
+				"world"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/vagrant/civ/public/Civ/Todo.txt",
+		"/C/vagrant/civ/public/game.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/view/posts/index.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/webroot/index.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/core/Dispatcher.php",
+		"/C/Users/julien/Downloads/Slim Framework 3/composer.json",
+		"/C/vagrant/civ/public/index.php",
+		"/C/vagrant/civ/public/index2.php",
+		"/C/Users/julien/Downloads/Tel20190329.ofx",
+		"/C/Users/julien/Downloads/Slim Framework 3/app/container.php",
+		"/C/Users/julien/Downloads/Slim Framework 3/public/index.php",
+		"/C/Users/julien/Downloads/Slim Framework 3/app/Controllers/PagesController.php",
+		"/C/Users/julien/Downloads/Slim Framework 3/app/Controllers/Controller.php",
+		"/C/Users/julien/Downloads/Slim Framework 3/app/Middlewares/FlashMiddleware.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/model/Category.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/model/Media.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/model/Post.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/model/User.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/controller/PostsController.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/controller/CategoriesController.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/core/Controller.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.20671/default.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.19055/.htaccess",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.17847/hook.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.16829/conf.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.15370/Post.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.15122/Media.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.46971/Model.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/controller/MediasController.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/controller/PagesController.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/controller/UsersController.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/core/Model.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/core/Form.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.23960/CategoriesController.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.28173/Controller.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/core/includes.php",
+		"/C/Users/julien/Downloads/Développer un site _ Jour 7, Authentification/config/conf.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.4295/Category.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.15598/User.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.3349/Controller.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6088.2972/functions.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa1112.41717/Validator.php",
+		"/C/Users/julien/AppData/Local/Temp/Rar$DIa6780.33631/OpenWeather.php"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "Cell.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
