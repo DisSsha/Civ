@@ -5,6 +5,7 @@ class Cell {
 	private $y;
 	private $terrain;
 	private $feature;
+	private $units = array();
 	// Strategic, Bonus or Luxury
 	private $bonus;
 
@@ -18,7 +19,7 @@ class Cell {
 	}
 
 	public function toString(){
-		return "[".$this->terrain->name[0].$this->feature[0]."]";
+		return "[".$this->terrain->name[0].$this->feature[0].$this->bonus[0].sizeof($this->units[])."]";
 	}
 
 	public function addFeature(){
@@ -33,7 +34,12 @@ class Cell {
 		if (rand(0,100) > 75){
 			$bonusAllowed = $this->terrain->bonusAllowed;
 			$randomFeat = rand(0,sizeof($bonusAllowed)-1);
-			$this->feature = $bonusAllowed[$randomFeat];
+			$this->bonus = $bonusAllowed[$randomFeat];
 		}
+	}
+
+	public function addUnit($unit){
+		$this->units[] = $unit;
+		$unit->setLocation($this->x,$this->y);
 	}
 }

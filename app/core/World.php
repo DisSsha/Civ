@@ -73,7 +73,14 @@ class World {
 			}
 		}
 	}
-
+	public function addUnit($unit,$x=-1,$y=-1){
+		if ($x == $y == -1){
+			$x = rand(0,$this->x);
+			$y = rand(0,$this->y);
+		}
+		$this->grid[$x][$y]->addUnit($settler);		
+		
+	}
 	public function printWorld(){
 		for ( $i = 0 ; $i < $this->x ; $i++){
 			for ( $j = 0; $j < $this->y ; $j++){
