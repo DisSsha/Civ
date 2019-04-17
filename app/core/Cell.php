@@ -19,7 +19,7 @@ class Cell {
 	}
 
 	public function toString(){
-		return "[".$this->terrain->name[0].$this->feature[0].$this->bonus[0].sizeof($this->units[])."]";
+		return "[".$this->terrain->name[0].$this->feature[0].$this->bonus[0].sizeof($this->units)."]";
 	}
 
 	public function addFeature(){

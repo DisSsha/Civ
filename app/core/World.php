@@ -74,11 +74,11 @@ class World {
 		}
 	}
 	public function addUnit($unit,$x=-1,$y=-1){
-		if ($x == $y == -1){
+		if ($x == -1 && $y == -1){
 			$x = rand(0,$this->x);
 			$y = rand(0,$this->y);
 		}
-		$this->grid[$x][$y]->addUnit($settler);		
+		$this->grid[$x][$y]->addUnit($unit);		
 		
 	}
 	public function printWorld(){

@@ -1,4 +1,0 @@
-Création du grid
-Création des cases d'eau
-Création des cases de sable,foret,montagne,riviere
-Remplissage du grid avec les ressources de luxe + ressources stratégiques

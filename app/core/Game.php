@@ -2,13 +2,14 @@
 
 require_once ('World.php');
 require_once ('Civilization.php');
-require_once ('units/Settler.php');
+require_once ('../models/units/Settler.php');
 
-public turn = 0;
-public $world = new World(10,10);
-public $civs = new array();
+$turn = 0;
+$world = new World(10,10);
+$civs =array();
 
-public function generateCivilization($number=1){
+function generateCivilization($number=1){
+	global $world,$civs;
 	for ($i = 0 ; $i < $number ; $i++){
 		$civs[$i] = new Civilization();
 		$settler = new Settler();
