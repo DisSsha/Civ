@@ -13,6 +13,6 @@ class Grassland extends Terrain{
 							"Truc",
 							"X",
 							"Z");
-	function __construct(){}
+	//function __construct(){}
 
 }
