@@ -21,7 +21,7 @@ function generateCivilization($number=2){
 }
 
 function render(){
-	global $turn;
+	global $turn,$world;
 	print $turn;
 	$world->printWorld();
 }
@@ -29,6 +29,7 @@ function render(){
 function turn(){
 	//Natural Events
 	//Babarian moves
+	global $civs;
 	foreach ($civs as $civ){
 		$civ->turn();
 	}

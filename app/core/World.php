@@ -75,8 +75,8 @@ class World {
 	}
 	public function addUnit($unit,$x=-1,$y=-1){
 		if ($x == -1 && $y == -1){
-			$x = rand(0,$this->x);
-			$y = rand(0,$this->y);
+			$x = rand(0,$this->x-1);
+			$y = rand(0,$this->y-1);
 		}
 		$this->grid[$x][$y]->addUnit($unit);		
 		
