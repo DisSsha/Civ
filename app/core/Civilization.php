@@ -37,5 +37,17 @@ class Civilization {
 		$unit->setCiv = $this;
 	}
 
+	public function turn(){
+		/**
+			> Global to local
+			Tech
+			Cultural
+			Government
+			Cities turns
+				Building to make
+			Units turns
+		*/
+	}
+
 
 }
