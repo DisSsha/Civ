@@ -3,47 +3,51 @@
 require_once ('World.php');
 require_once ('Civilization.php');
 require_once ('../models/units/Settler.php');
+require_once ('Render.php');
 
-$turn = 0;
-$world = new World(10,10);
-$civs =array();
-$techtree = array();
-$culttree = array();
+class Game {
+  
+  public $turn = 0;
+  public $world ;
+  public $civs =array();
+  public $techtree = array();
+  public $culttree = array();
+  public $render;
 
-function generateCivilization($number=2){
-	global $world,$civs;
-	for ($i = 0 ; $i < $number ; $i++){
-		$civs[$i] = new Civilization();
-		$settler = new Settler();
-		$civs[$i]->addUnit($settler);
-		$world->addUnit($settler);		
-	}
+  public function __construct($x=10,$y=10){
+	$this->world = new World($x,$y);
+	$this->render = new Render();
+  }
+  
+  function generateCivilization($number=2){
+  	for ($i = 0 ; $i < $number ; $i++){
+  		$this->civs[$i] = new Civilization();
+  		$settler = new Settler();
+  		$this->civs[$i]->addUnit($settler);
+  		$this->world->addUnit($settler);		
+  	}
+  }
+  
+  function render(){
+  	print $this->turn;
+  	$this->world->printWorld();
+  }
+  
+  function turn(){
+  	//Natural Events
+  	//Babarian moves
+  	foreach ($this->civs as $civ){
+  		$civ->turn();
+  	}
+  }
+
 }
-
-function render(){
-	global $turn,$world;
-	print $turn;
-	$world->printWorld();
-}
-
-function turn(){
-	//Natural Events
-	//Babarian moves
-	global $civs;
-	foreach ($civs as $civ){
-		$civ->turn();
-	}
-}
-
-$world->generateTerrain();
-$world->generateFeatures();
-$world->generateBonus();
-generateCivilization();
+$game = new Game();
+$game->world->generateTerrain();
+$game->world->generateFeatures();
+$game->world->generateBonus();
+$game->generateCivilization();
 #generateBarabarian
-$world->printWorld();
-while (true){
-	turn();
-	$turn++;
-	render();
-	sleep (15);
-}
+$game->world->printWorld();
+$game->turn();
+$game->render();
