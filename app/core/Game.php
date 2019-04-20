@@ -19,7 +19,7 @@ class Game {
 	$this->render = new Render();
   }
   
-  function generateCivilization($number=2){
+  public function generateCivilization($number=2){
   	for ($i = 0 ; $i < $number ; $i++){
   		$this->civs[$i] = new Civilization();
   		$settler = new Settler();
@@ -28,26 +28,27 @@ class Game {
   	}
   }
   
-  function render(){
-  	print $this->turn;
-  	$this->world->printWorld();
-  }
-  
-  function turn(){
+  public function turn(){
   	//Natural Events
   	//Babarian moves
+  	print $this->turn;
+	$this->turn++;
   	foreach ($this->civs as $civ){
   		$civ->turn();
   	}
+	print $this->render->render($this->world);
+  }
+
+  public function newGame(){
+	$w = $this->world;
+	$w->generateTerrain();
+	$w->generateFeatures();
+	$w->generateBonus();
+	$this->generateCivilization();
+	#generateBarabarian
   }
 
 }
 $game = new Game();
-$game->world->generateTerrain();
-$game->world->generateFeatures();
-$game->world->generateBonus();
-$game->generateCivilization();
-#generateBarabarian
-$game->world->printWorld();
+$game->newGame();
 $game->turn();
-$game->render();

@@ -7,8 +7,8 @@ require_once ('../models/terrains/Terrain.php');
 class World {
 
 	private $grid = array();
-	private $x;
-	private $y;
+	public $x;
+	public $y;
 	//private $terrainsList = array ( "Grassland");
 	private $terrainsList ;
 						/**new Plains(),
@@ -58,10 +58,14 @@ class World {
 		}	
 	}
 
+	public function getCell($x,$y){
+		return $this->grid[$x][$y];
+	}
+
 	public function generateFeatures(){
 		for ( $i = 0 ; $i < $this->x ; $i++){
 			for ( $j = 0; $j < $this->y ; $j++){
-				$this->grid[$i][$j]->addFeature();
+				$this->grid[$i][$j]->setFeature();
 			}
 		}			
 	}
@@ -69,7 +73,7 @@ class World {
 	public function generateBonus(){
 		for ( $i = 0 ; $i < $this->x ; $i++){
 			for ( $j = 0; $j < $this->y ; $j++){
-				$this->grid[$i][$j]->addBonus();
+				$this->grid[$i][$j]->setBonus();
 			}
 		}
 	}
