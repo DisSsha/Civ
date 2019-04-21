@@ -49,5 +49,9 @@ class Civilization {
 		*/
 	}
 
+	public function save($pdo,$worldId,$turn){
+
+	}
+
 
 }

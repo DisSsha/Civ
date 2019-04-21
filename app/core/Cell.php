@@ -22,15 +22,11 @@ class Cell {
 		return $this->terrain;
 	}
 
-	public function toString(){
-		return "[".$this->terrain->name[0].$this->feature[0].$this->bonus[0].sizeof($this->units)."]";
-	}
-
-	public function setFeature(){
+	public function addFeature(){
 		if (rand(0,100) > 75){
 			$featureAllowed = $this->terrain->featureAllowed;
 			$randomFeat = rand(0,sizeof($featureAllowed)-1);
-			$this->feature = $featureAllowed[$randomFeat];
+			$this->feature = new $featureAllowed[$randomFeat]();
 		}
 	}
 	
@@ -49,5 +45,14 @@ class Cell {
 	public function addUnit($unit){
 		$this->units[] = $unit;
 		$unit->setLocation($this->x,$this->y);
+	}
+
+	public function save($pdo,$worldId,$turn){
+		$feature = null;
+		if ($this->feature != null){
+			$feature = $this->feature->name;
+		}
+		$pdo->query("INSERT INTO `cells` (`id`, `game_id`, `x`, `y`, `terrain`, `feature`, `bonus`) VALUES (NULL, '".$worldId."', '".$this->x."', '".$this->y."', '".$this->terrain->name."', '".$feature."', 'BONUSTODO');");
+
 	}
 }

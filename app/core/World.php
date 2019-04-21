@@ -1,44 +1,46 @@
 <?php 
 
 require_once ('Cell.php');
-require_once ('../models/terrains/Grassland.php');
-require_once ('../models/terrains/Terrain.php');
+
+require_once ('models/terrains/Grassland.php');
+
+require_once ('models/features/Woods.php');
 
 class World {
 
-	private $grid = array();
+	public $grid = array();
 	public $x;
 	public $y;
 	//private $terrainsList = array ( "Grassland");
-	private $terrainsList ;
-						/**new Plains(),
-						new Desert(),
-						new Tundra()),
-						new Snow(),
-						new Coast(),
-						new Lake(),
-						new Ocean()
-					);*/
+	public $terrainsList ;
 
-	private $featuresList = array (
-							"Woods",
-							"Rainforest",
-							"Marsh",
-							"Floodplains",
-							"Oasis",
-							"Mountains",
-							"Cliffs",
-							"Reef",
-							"Ice",
-							"Cataract",
-							"Volcano",
-							"Volcanic Soil",
-							"Geothermal Fissure");
+	public $featuresList ;
 
 	function __construct($x,$y){
 		$this->y = $y;
 		$this->x = $x;
-		$this->terrainsList = array ( new Grassland());
+		$this->terrainsList = array ( 
+										"Grassland" => new Grassland(), 
+									//	"Plains" 	=> new Plains(), 
+									//	"Desert" 	=> new Desert(), 
+									//	"Snow" 		=> new Snow(),
+									//	"Coast" 	=> new Coast(), 
+									//	"Lake" 		=> new Lake(), 
+									//	"Ocean" 	=> new Ocean() 
+									);
+
+		$this->featuresList = array ( 
+										"Woods" 		=> new Woods(),
+									//	"Plains"		=> new Rainforest(),
+									//	"Marsh"			=> new Marsh(),
+									//	"Floodplains" 	=> new Floodplains(),
+									//	"Oasis" 		=> new Oasis(),
+									//	"Mountains"		=> new Mountains(),
+									//	"Cliffs"		=> new Cliffs(),
+									//	"Reef" 			=> new Reef(),
+									//	"Ice" 			=> new Ice(),
+									//	"Volcano"		=> new Volcano(),
+									 );
 
 		for ( $i = 0 ; $i < $x ; $i++){
 			for ( $j = 0; $j < $y ; $j++){
@@ -50,9 +52,11 @@ class World {
 	public function generateTerrain($type="random"){		
 		if ($type == "random"){
 			$maxRand = sizeof($this->terrainsList)-1;
+			$keys = array_keys($this->terrainsList);
 			for ( $i = 0 ; $i < $this->x ; $i++){
 				for ( $j = 0; $j < $this->y ; $j++){
-					$this->grid[$i][$j]->setTerrain($this->terrainsList[rand(0,$maxRand)]);
+					$index = $keys[rand(0,$maxRand)];
+					$this->grid[$i][$j]->setTerrain($this->terrainsList[$index]);
 				}
 			}		
 		}	
@@ -65,7 +69,7 @@ class World {
 	public function generateFeatures(){
 		for ( $i = 0 ; $i < $this->x ; $i++){
 			for ( $j = 0; $j < $this->y ; $j++){
-				$this->grid[$i][$j]->setFeature();
+				$this->grid[$i][$j]->addFeature();
 			}
 		}			
 	}
@@ -85,12 +89,12 @@ class World {
 		$this->grid[$x][$y]->addUnit($unit);		
 		
 	}
-	public function printWorld(){
+
+	public function save($pdo,$worldId,$turn){
 		for ( $i = 0 ; $i < $this->x ; $i++){
 			for ( $j = 0; $j < $this->y ; $j++){
-				print ($this->grid[$i][$j]->toString());
+				$this->grid[$i][$j]->save($pdo,$worldId,$turn);
 			}
-			print ("\n");
 		}
 	}
 
