@@ -6,6 +6,8 @@ require_once ('models/terrains/Grassland.php');
 
 require_once ('models/features/Woods.php');
 
+require_once ('models/units/Settler.php');
+
 class World {
 
 	public $grid = array();
@@ -19,6 +21,9 @@ class World {
 	function __construct($x,$y){
 		$this->y = $y;
 		$this->x = $x;
+		$this->unitList = array (
+									"Settler" => new Settler()
+							);
 		$this->terrainsList = array ( 
 										"Grassland" => new Grassland(), 
 									//	"Plains" 	=> new Plains(), 
@@ -87,7 +92,6 @@ class World {
 			$y = rand(0,$this->y-1);
 		}
 		$this->grid[$x][$y]->addUnit($unit);		
-		
 	}
 
 	public function save($pdo,$worldId,$turn){
@@ -98,4 +102,11 @@ class World {
 		}
 	}
 
+	public function load($pdo,$worldId,$turn){
+		for ( $i = 0 ; $i < $this->x ; $i++){
+			for ( $j = 0; $j < $this->y ; $j++){
+				$this->grid[$i][$j]->load($pdo,$worldId,$turn);
+			}
+		}
+	}
 }

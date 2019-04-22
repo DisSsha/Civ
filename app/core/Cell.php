@@ -5,7 +5,7 @@ class Cell {
 	private $y;
 	private $terrain;
 	private $feature;
-	private $units = array();
+	private $units=null;
 	// Strategic, Bonus or Luxury
 	private $bonus;
 
@@ -34,6 +34,10 @@ class Cell {
 		return $this->feature;
 	}
 
+	public function getUnit(){
+		return $this->units;
+	}
+
 	public function setBonus(){
 		if (rand(0,100) > 75){
 			$bonusAllowed = $this->terrain->bonusAllowed;
@@ -42,8 +46,9 @@ class Cell {
 		}
 	}
 
+	// TODO handle unit per tile 
 	public function addUnit($unit){
-		$this->units[] = $unit;
+		$this->units = $unit;
 		$unit->setLocation($this->x,$this->y);
 	}
 
@@ -53,6 +58,15 @@ class Cell {
 			$feature = $this->feature->name;
 		}
 		$pdo->query("INSERT INTO `cells` (`id`, `game_id`, `x`, `y`, `terrain`, `feature`, `bonus`) VALUES (NULL, '".$worldId."', '".$this->x."', '".$this->y."', '".$this->terrain->name."', '".$feature."', 'BONUSTODO');");
+
+	}
+
+	public function load($pdo,$worldId,$turn){
+		$reply = $pdo->query("SELECT * from `cells` where x=".$this->x." AND y=".$this->y." AND game_id=".$worldId.";");
+		$data = $reply->fetch();
+		$this->terrain = new $data['terrain'];
+		if ($data['feature'] != null)
+			$this->feature = new $data['feature'];
 
 	}
 }

@@ -6,7 +6,6 @@ class Render {
 	public $game;
 
 	public function __construct($game){
-		$this->world = $game->world;
 		$this->game = $game;
 	}
 
@@ -40,13 +39,20 @@ class Render {
 			$css .= "\t\t\t\tbackground-image : url(img/".$value->img.");\n";
 			$css .= "\t\t\t}\n";
 		}
-		foreach ($this->world->featuresList as $key => $value ){
+		/**foreach ($this->world->featuresList as $key => $value ){
 			$css .= "\t\t\t.".$value->name." {\n";
 			$css .= "\t\t\t\tcontent : url(img/".$value->img.");\n";
 			$css .= "\t\t\t\twidth: 100%;\n";
 			$css .= "\t\t\t\theight: 100%;\n";
 			$css .= "\t\t\t}\n";
 		}
+		foreach ($this->world->unitList as $key => $value ){
+			$css .= "\t\t\t.".$value->name." {\n";
+			$css .= "\t\t\t\tcontent : url(img/".$value->img.");\n";
+			$css .= "\t\t\t\twidth: 100%;\n";
+			$css .= "\t\t\t\theight: 100%;\n";
+			$css .= "\t\t\t}\n";
+		}*/
 		$css .= "\t\t</style>\n";
 		return $css;
 	}
@@ -58,7 +64,8 @@ class Render {
 		return $html;
 	}
 
-	public function render(){
+	public function render($world){
+		$this->world = $world;
 		$html = $this->generateHeader();
 		$html .= "\t<body>\n";
 		$html .= "\t<div class=\"sidebar\">\n";
@@ -70,11 +77,17 @@ class Render {
 			for ($j=0;$j < $this->world->y;$j++){
 				$cell = $this->world->getCell($i,$j);
 				$terrain = $cell->getTerrain()->name;
-				$feature = "";
+				$featureImg = "";
 				if ($cell->getFeature() != null ){
-					$feature = $cell->getFeature()->name; 
+					$feature = $cell->getFeature(); 
+					$featureImg = "<img src=\"img/".$feature->img."\" style=\"grid-column-start: 1;grid-row-start: 1;z-index:1;width:100%;height:100%\" />";
 				}
-				$html.= "\t\t\t<div class=\"tile ".$terrain." ".$feature."\"></div>\n";
+				$unitImg = "";
+				if ($cell->getUnit() != null ){
+					$unit = $cell->getUnit(); 
+					$unitImg = "<img src=\"img/".$unit->img."\" style=\"grid-column-start: 1;grid-row-start: 1;z-index:2;width:100%;height:100%\" />";
+				}
+				$html.= "\t\t\t<div class=\"tile ".$terrain."\" style=\"display:grid\">".$featureImg." ".$unitImg."</div>\n";
 			}
 		}
 		$html .= $this->generateFooter();

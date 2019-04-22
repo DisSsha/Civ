@@ -2,9 +2,12 @@
 
 abstract class Unit{
 
-	private $x;
-	private $y;
-	private $civ;
+	public $x;
+	public $y;
+	public $civ;
+	public $name;
+	public $img;
+	public $movement;
 
 	public function setLocation($x,$y){
 		$this->x = $x;

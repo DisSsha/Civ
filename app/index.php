@@ -5,7 +5,7 @@ include ('utils/database.php');
 
 $game = new Game();
 if (isset($_GET["world"]) && isset($_GET["turn"]) ){
-	$game->loadGame($pdo,$_GET["world"],$_GET["turn"]);
+	$game->load($pdo,$_GET["world"],$_GET["turn"]);
 }
 if ( isset( $_GET["new"] ) ){
 	$game->newGame();	
