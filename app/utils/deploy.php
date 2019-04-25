@@ -6,7 +6,6 @@
 	 *
 	 *		https://gist.github.com/1809044
 	 */
-
 	// The commands
 	$commands = array(
 		'echo $PWD',
@@ -55,6 +54,7 @@
 
 <?php 
 	echo $output; 
+	$limit=10;
 	$msgs = array();
   	exec( "/usr/bin/env git log --pretty=tformat:%s $limit", $msgs );
   	$lines = array();
