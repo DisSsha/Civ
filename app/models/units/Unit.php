@@ -8,6 +8,7 @@ abstract class Unit{
 	public $name;
 	public $img;
 	public $movement;
+	public $health;
 
 	public function setLocation($x,$y){
 		$this->x = $x;
@@ -17,5 +18,11 @@ abstract class Unit{
 	public function setCiv($civ){
 		$this->civ = $civ;
 	}
+
+	public function save($pdo,$worldId,$turn){
+		$pdo->query("INSERT INTO `units` (`id`, `game_id`,`civ_id`, `x`,`y`,`name`,) VALUES (NULL, '".$worldId."', '".$this->civ->id."','".$this->x."','".$this->y."','".$this->name."');");
+	}
+
+	
 
 }

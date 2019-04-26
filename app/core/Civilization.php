@@ -1,5 +1,6 @@
 <?php
 
+require_once ('models/units/Settler.php');
 
 
 class Civilization {
@@ -18,6 +19,7 @@ class Civilization {
 	private $ongoingCultural;
 	private $unlockedCultural;
 	private $id;
+	public $game;
 
 	/** Name
 		inherit bonus (2)
@@ -31,8 +33,8 @@ class Civilization {
 	public $unlockedGovernment;
 	public $CivRelationShip;
 
-	public function __construct(){
-
+	public function __construct($game){
+		$this->game = $game;
 	}
 	public function addUnit($unit){
 		$this->units[] = $unit;
@@ -53,7 +55,7 @@ class Civilization {
 
 	public function save($pdo,$worldId,$turn){
 		if ($this->id == null){
-			$reply = $pdo->query("INSERT INTO `civ` (`id`, `turn`, x, y) VALUES (NULL, '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
+			$reply = $pdo->query("INSERT INTO `civs` (`id`, `game_id`) VALUES (NULL, '".$worldId."' );");
         	$this->id = $pdo->lastInsertId();
 		}
 		foreach ($this->units as $key => $value) {
@@ -64,6 +66,18 @@ class Civilization {
 		}
 		//save Civ state (gold etc)
 
+	}
+
+	public function load($pdo,$worldId,$turn){
+		$reply = $pdo->query("SELECT * from `units` where civ_id=".$this->civ->id." AND game_id=".$worldId.";");
+		$data = $reply->fetch();
+		foreach ($data as $key => $value) {
+			$unit = new $data["name"];
+			$unit->x = $data['x'];
+			$unit->y = $data['y'];
+			$this->addUnit($unit);
+			$this->game->world->addUnit($unit);
+		}
 	}
 
 

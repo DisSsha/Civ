@@ -21,7 +21,7 @@ class Game {
   
   public function generateCivilization($number=2){
   	for ($i = 0 ; $i < $number ; $i++){
-  		$this->civs[$i] = new Civilization();
+  		$this->civs[$i] = new Civilization($this);
   		$settler = new Settler();
       $settler->setCiv($this->civs[$i]);
   		$this->civs[$i]->addUnit($settler);
@@ -78,7 +78,15 @@ class Game {
 
     $this->world = new World($data["x"],$data['y']);
     $this->world->load($pdo,$worldId,$turn);
-    //TODO same with civs
+
+    $reply = $pdo->query("SELECT * from `civs` where game_id=".$worldId." ;");
+    $data = $reply->fetch();
+    $i = 0;
+    foreach ($data as $key => $value) {
+      $this->civs[$i] = new Civilization($this);
+      $this->civs[$i]->load($pdo,$this->id,$this->turn);
+      $i++;
+    }
   }
 
 }
