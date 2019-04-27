@@ -17,6 +17,7 @@
 
 	// Run the commands for output
 	$output = '';
+	chdir('../../');
 	foreach($commands AS $command){
 		// Run it
 		$tmp = shell_exec($command);
