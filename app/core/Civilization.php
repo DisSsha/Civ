@@ -18,7 +18,7 @@ class Civilization {
 	private $ongoingTechnology;
 	private $ongoingCultural;
 	private $unlockedCultural;
-	private $id;
+	public $id;
 	public $game;
 
 	/** Name
