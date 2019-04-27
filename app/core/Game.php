@@ -80,10 +80,12 @@ class Game {
     $this->world->load($pdo,$worldId,$turn);
 
     $reply = $pdo->query("SELECT * from `civs` where game_id=".$worldId." ;");
-    $data = $reply->fetch();
+    $data = $reply->fetchAll();
     $i = 0;
     foreach ($data as $key => $value) {
-      $this->civs[$i] = new Civilization($this);
+      $civ = new Civilization($this);
+      $civ->id = $data[$key]["id"];
+      $this->civs[$i] = $civ;
       $this->civs[$i]->load($pdo,$this->id,$this->turn);
       $i++;
     }

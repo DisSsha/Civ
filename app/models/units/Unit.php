@@ -20,7 +20,7 @@ abstract class Unit{
 	}
 
 	public function save($pdo,$worldId,$turn){
-		$pdo->query("INSERT INTO `units` (`id`, `game_id`,`civ_id`, `x`,`y`,`name`) VALUES (NULL, '".$worldId."', '".$this->civ->id."','".$this->x."','".$this->y."','".$this->name."');");
+		$pdo->query("INSERT INTO `units` (`id`, `game_id`,`civ_id`, `x`,`y`,`name`,`health`) VALUES (NULL, '".$worldId."', '".$this->civ->id."','".$this->x."','".$this->y."','".$this->name."','".$this->health."');");
 	}
 
 	
