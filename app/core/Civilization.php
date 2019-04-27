@@ -69,14 +69,14 @@ class Civilization {
 	}
 
 	public function load($pdo,$worldId,$turn){
-		$reply = $pdo->query("SELECT * from `units` where civ_id=".$this->civ->id." AND game_id=".$worldId.";");
-		$data = $reply->fetch();
+		$reply = $pdo->query("SELECT * from `units` where civ_id=".$this->id." AND game_id=".$worldId.";");
+		$data = $reply->fetchAll();
 		foreach ($data as $key => $value) {
-			$unit = new $data["name"];
-			$unit->x = $data['x'];
-			$unit->y = $data['y'];
+			$unit = new $value["name"];
+			$unit->x = $value['x'];
+			$unit->y = $value['y'];
 			$this->addUnit($unit);
-			$this->game->world->addUnit($unit);
+			$this->game->world->addUnit($unit,$unit->x,$unit->y);
 		}
 	}
 

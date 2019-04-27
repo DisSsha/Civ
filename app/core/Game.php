@@ -25,7 +25,7 @@ class Game {
   		$settler = new Settler();
       $settler->setCiv($this->civs[$i]);
   		$this->civs[$i]->addUnit($settler);
-  		$this->world->addUnit($settler);		
+  		$this->world->setUnit($settler);		
   	}
   }
   
