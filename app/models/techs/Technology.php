@@ -1,5 +1,5 @@
 <?php
-require_once ('../Buildable.php');
+require_once ('models/Buildable.php');
 
 abstract class Technology extends Buildable{
 

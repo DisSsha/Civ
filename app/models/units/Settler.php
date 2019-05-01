@@ -1,7 +1,7 @@
 <?php 
 
 require_once('Unit.php');
-require_once('../actions/Move.php');
+require_once('models/actions/Move.php');
 
 
 class Settler extends Unit {

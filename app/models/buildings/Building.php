@@ -1,6 +1,6 @@
 <?php
 
-require ('../Buildable.php');
+require_once ('models/Buildable.php');
 
 abstract class Building extends Buildable{
 

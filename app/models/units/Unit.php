@@ -1,6 +1,6 @@
 <?php
 
-require ('../Buildable.php');
+require ('models/Buildable.php');
 
 abstract class Unit extends Buildable{
 
