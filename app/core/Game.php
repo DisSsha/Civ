@@ -3,6 +3,14 @@
 require_once ('World.php');
 require_once ('Civilization.php');
 require_once ('models/units/Settler.php');
+require_once ('models/techs/Pottery.php');
+require_once ('models/techs/AnimalHusbandry.php');
+require_once ('models/techs/Mining.php');
+require_once ('models/techs/Sailing.php');
+require_once ('models/techs/Astrology.php');
+require_once ('models/techs/Archery.php');
+require_once ('models/techs/Irrigation.php');
+require_once ('models/techs/Writing.php');
 require_once ('Render.php');
 
 class Game {
@@ -10,13 +18,23 @@ class Game {
   public $turn = 0;
   public $world ;
   public $civs =array();
-  public $techtree = array();
+  public $techtree;
   public $culttree = array();
   public $render;
   public $id = null;
 
   public function __construct($x=10,$y=10){
-	 $this->render = new Render($this);
+	  $this->render = new Render($this);
+    $this->techtree = array (
+      "Pottery" => new Pottery(),
+      "AnimalHusbandry" => new AnimalHusbandry(),
+      "Mining" => new Mining(),
+      "Sailing" => new Sailing(),
+      "Astrology" => new Astrology(),
+      "Archery" => new Archery(),
+      "Irrigation" => new Irrigation(),
+      "Writing" => new Writing()
+    );
   }
   
   public function generateCivilization($number=2){
@@ -25,18 +43,32 @@ class Game {
   		$settler = new Settler();
       $settler->setCiv($this->civs[$i]);
   		$this->civs[$i]->addUnit($settler);
-  		$this->world->setUnit($settler);		
+  		$this->world->addUnit($settler);		
   	}
   }
   
   public function turn(){
   	//Natural Events
   	//Babarian moves
-    print $this->turn;
   	$this->turn++;
     foreach ($this->civs as $civ){
     		$civ->turn();
     	}
+  }
+
+  public function techAvailable($civ){
+    // for each tech if the tech is
+    // not unlocked
+    // satisfying prerequisites
+    // add it
+    // return the array
+    $reply = array();
+    $unlocked = array_keys($civ->unlockedTechnologies);
+    foreach ($techtree as $techname => $techObj){
+      if ( !in_array($techname,$unlocked) && $techObj->satisfy($unlocked)){
+        $reply[] = new $techname();
+    }
+    return $reply;
   }
 
   public function render(){
@@ -68,6 +100,13 @@ class Game {
         die();
       }      
     }
+  }
+
+  public function loadLastTurn($pdo,$worldId){
+    $reply = $pdo->query("SELECT turn from `game` where id=".$worldId." ORDER by turn DESC limit 1;");
+    $data = $reply->fetch();
+    $turn = $data["turn"];
+    $this->load($pdo,$worldId,$turn);
   }
 
   public function load($pdo,$worldId,$turn){

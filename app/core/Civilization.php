@@ -6,20 +6,23 @@ require_once ('models/units/Settler.php');
 class Civilization {
 	
 	//purpose
-	private $agenda;
-	private $Civbonus;
-	private $cities = array();
-	private $units = array();
-	private $gold = 0;
-	private $faith = 0;
-	private $tradeRoadLimit = 0;
-	private $strategicRessources ;
-	private $unlockedTechnologies;
-	private $ongoingTechnology;
-	private $ongoingCultural;
-	private $unlockedCultural;
+	public $agenda;
+	public $Civbonus;
+	public $cities = array();
+	public $units = array();
+	public $gold = 0;
+	public $faith = 0;
+	public $tradeRoadLimit = 0;
+	public $strategicRessources = array();
+	public $unlockedTechnologies = array();
+	public $ongoingTechnology = null;
+	public $ongoingCultural = null;
+	public $unlockedCultural = array();
 	public $id;
 	public $game;
+  public $turnScience   = 0;
+  public $turnCultural  = 0;
+  public $turnGold      = 0;
 
 	/** Name
 		inherit bonus (2)
@@ -41,7 +44,50 @@ class Civilization {
 		$unit->setCiv = $this;
 	}
 
-	public function turn(){
+  public function pickTechnology(){
+    $AvailableTechnology = $this->game->techAvailable($this);
+    $this->ongoingTechnology = $this->choose($AvailableTechnology);
+  }
+  
+  // take a list of object and return only one
+  public function choose($things){// TODO choose base on traits
+    if(size($things) == 0){
+      print "Error : can't choose($things) arg is empty !";
+    }
+    return $things[0]; 
+  }
+
+  public function tech(){
+    if ($ongoingTechnology == null){  // First turn
+      $this->pickTechnology();
+    }
+    $this->ongoingTechnology->search($this->turnScience)
+    if ($this->ongoingTechnology->cost <= 0){ // Technology unlocked
+      $this->unlockedTechonologies[] = $ongoingTechnology;
+      $this->pickTechnology();
+    }
+  }
+
+  public function prepareTurn(){
+    $this->turnScience = 0;
+    foreach ($this->cities as $cityname => $city){
+      $this->turnScience += $city->science;
+      $this->gold += $city->gold;
+    }
+  }
+
+  public function cities(){
+    foreach ($this->cities as $name => $city){
+      $city->turn();
+    }
+  }
+
+  public function units(){
+    foreach ($this->units as $name => $unit){
+      $unit->turn();
+    }
+  }
+
 		/**
 			> Global to local
 			Tech
@@ -51,6 +97,13 @@ class Civilization {
 				Building to make
 			Units turns
 		*/
+	public function turn(){
+    $this->prepareTurn();
+    $this->tech();
+    //$this->cult();
+    //$this->gov();
+    $this->cities();
+    $this->units();
 	}
 
 	public function save($pdo,$worldId,$turn){

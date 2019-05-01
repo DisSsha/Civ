@@ -13,7 +13,6 @@ class World {
 	public $grid = array();
 	public $x;
 	public $y;
-	//private $terrainsList = array ( "Grassland");
 	public $terrainsList ;
 
 	public $featuresList ;
