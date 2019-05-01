@@ -1,6 +1,7 @@
 <?php
 
 require_once ('models/units/Settler.php');
+require_once ('core/City.php');
 
 
 class Civilization {
@@ -46,7 +47,8 @@ class Civilization {
 
   public function pickTechnology(){
     $AvailableTechnology = $this->game->techAvailable($this);
-    $this->ongoingTechnology = $this->choose($AvailableTechnology);
+		$this->ongoingTechnology = $this->choose($AvailableTechnology);
+		$this->ongoingTechnology->startTurn = $this->game->turn;
   }
   
   // take a list of object and return only one
@@ -57,12 +59,13 @@ class Civilization {
     return $things[0]; 
   }
 
-  public function tech(){
+  public function techTurn(){
     if ($ongoingTechnology == null){  // First turn
       $this->pickTechnology();
     }
-    $this->ongoingTechnology->search($this->turnScience)
-    if ($this->ongoingTechnology->cost <= 0){ // Technology unlocked
+    $this->ongoingTechnology->cost -= ($this->turnScience);
+		if ($this->ongoingTechnology->cost <= 0){ // Technology unlocked
+			$this->ongoingTechnology->endTurn = $this->game->turn;
       $this->unlockedTechonologies[] = $ongoingTechnology;
       $this->pickTechnology();
     }
@@ -71,20 +74,30 @@ class Civilization {
   public function prepareTurn(){
     $this->turnScience = 0;
     foreach ($this->cities as $cityname => $city){
-      $this->turnScience += $city->science;
-      $this->gold += $city->gold;
-    }
+      $this->turnScience += $city->getScience();
+      $this->gold += $city->getGold;
+		}
+		//add cost on units
   }
+	
+	public function pickJob($city){
+		$AvailableJob = $this->game->JobAvailable($this,$city);
+		$city->job = $this->choose($AvailableJob);
+		$city->job->startTurn = $this->game->turn;
+}
 
-  public function cities(){
+  public function citiesTurn(){
     foreach ($this->cities as $name => $city){
-      $city->turn();
+			if($city->job == null){
+				$city->pickJob();
+			}
+			$city->job->build($this->getProduction());
     }
   }
 
-  public function units(){
+  public function unitsTurn(){
     foreach ($this->units as $name => $unit){
-      $unit->turn();
+    //  $unit->turn($this->choose($unit->getActionsAvailable()),);
     }
   }
 
@@ -99,11 +112,11 @@ class Civilization {
 		*/
 	public function turn(){
     $this->prepareTurn();
-    $this->tech();
+    $this->techTurn();
     //$this->cult();
     //$this->gov();
-    $this->cities();
-    $this->units();
+    $this->citiesTurn();
+    $this->unitsTurn();
 	}
 
 	public function save($pdo,$worldId,$turn){

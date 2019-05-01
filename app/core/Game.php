@@ -2,7 +2,9 @@
 
 require_once ('World.php');
 require_once ('Civilization.php');
+
 require_once ('models/units/Settler.php');
+
 require_once ('models/techs/Pottery.php');
 require_once ('models/techs/AnimalHusbandry.php');
 require_once ('models/techs/Mining.php');
@@ -11,6 +13,9 @@ require_once ('models/techs/Astrology.php');
 require_once ('models/techs/Archery.php');
 require_once ('models/techs/Irrigation.php');
 require_once ('models/techs/Writing.php');
+
+require_once ('models/buildings/Granary.php');
+
 require_once ('Render.php');
 
 class Game {
@@ -18,22 +23,28 @@ class Game {
   public $turn = 0;
   public $world ;
   public $civs =array();
-  public $techtree;
+  public $techList;
   public $culttree = array();
   public $render;
   public $id = null;
 
   public function __construct($x=10,$y=10){
 	  $this->render = new Render($this);
-    $this->techtree = array (
-      "Pottery" => new Pottery(),
+    $this->techList = array (
+      "Pottery"         => new Pottery(),
       "AnimalHusbandry" => new AnimalHusbandry(),
-      "Mining" => new Mining(),
-      "Sailing" => new Sailing(),
-      "Astrology" => new Astrology(),
-      "Archery" => new Archery(),
-      "Irrigation" => new Irrigation(),
-      "Writing" => new Writing()
+      "Mining"          => new Mining(),
+      "Sailing"         => new Sailing(),
+      "Astrology"       => new Astrology(),
+      "Archery"         => new Archery(),
+      "Irrigation"      => new Irrigation(),
+      "Writing"         => new Writing()
+    );
+    $this->unitList = array(
+      "Settler"         => new Settler()
+    );
+    $this->buildingList = array(
+      "Granary"         => new Granary()
     );
   }
   
@@ -64,9 +75,27 @@ class Game {
     // return the array
     $reply = array();
     $unlocked = array_keys($civ->unlockedTechnologies);
-    foreach ($techtree as $techname => $techObj){
+    foreach ($this->techList as $techname => $techObj){
       if ( !in_array($techname,$unlocked) && $techObj->satisfy($unlocked)){
-        $reply[] = new $techname();
+        $reply[$techname] = new $techname();
+      }
+    }
+    return $reply;
+  }
+
+  public function JobAvailable($civ,$city){
+    $reply = array();
+    $unlocked = array_keys($civ->unlockedTechnologies);
+    $built = array_keys($city->building);
+    foreach($this->unitList as $unitname => $unitObj){
+      if($unitObj->satisfy($unlocked)){
+        $reply[$unitname] = new $unitname();
+      }
+    }
+    foreach($this->buildingList as $buildingname => $buildingObj){
+      if($buildingObj->satisfy($unlocked) && !in_array($buildingname,$built)){// TODO add condition for required infrastructures
+        $reply[$buildingname] = new $buildingname();
+      }
     }
     return $reply;
   }
@@ -94,7 +123,7 @@ class Game {
         foreach ($this->civs as $key => $value) {
           $value->save($pdo,$this->id,$this->turn);
         }
-        //TODO same with techtree : cultree
+        //TODO same with techList : cultree
       }catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
