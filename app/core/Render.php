@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Render {
 
@@ -69,7 +69,7 @@ class Render {
 		$html = $this->generateHeader();
 		$html .= "\t<body>\n";
 		$html .= "\t<div class=\"sidebar\">\n";
-		$html .= "\t<p>Turn ".$this->game->turn."</p>\n";
+		$html .= "\t<p>Turn : ".$this->game->turn."</p>\n";
 		$html .= "\t<p>ID ".$this->game->id."</p>\n";
 		$html .= "\t</div>\n";
 		$html .= "\t\t<div class=\"container\">\n";
@@ -79,12 +79,12 @@ class Render {
 				$terrain = $cell->getTerrain()->name;
 				$featureImg = "";
 				if ($cell->getFeature() != null ){
-					$feature = $cell->getFeature(); 
+					$feature = $cell->getFeature();
 					$featureImg = "<img src=\"img/".$feature->img."\" style=\"grid-column-start: 1;grid-row-start: 1;z-index:1;width:100%;height:100%\" />";
 				}
 				$unitImg = "";
 				if ($cell->getUnit() != null ){
-					$unit = $cell->getUnit(); 
+					$unit = $cell->getUnit();
 					$unitImg = "<img src=\"img/".$unit->img."\" style=\"grid-column-start: 1;grid-row-start: 1;z-index:2;width:100%;height:100%\" />";
 				}
 				$html.= "\t\t\t<div class=\"tile ".$terrain."\" style=\"display:grid\">".$featureImg." ".$unitImg."</div>\n";
