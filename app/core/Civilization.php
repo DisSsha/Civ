@@ -130,7 +130,7 @@ class Civilization {
 		foreach ($this->cities as $key => $value){
 			$this->cities[$key]->save($pdo,$worldId,$turn);
 		}
-		//save Civ state (gold etc)
+		//save Civ state (gold, tech,etc)
 
 	}
 

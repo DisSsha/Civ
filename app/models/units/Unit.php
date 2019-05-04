@@ -6,7 +6,7 @@ abstract class Unit extends Buildable{
 
 	public $x;
 	public $y;
-	public $civ;
+	public $civ = null;
 	public $name;
 	public $img;
 	public $movement;
@@ -25,7 +25,10 @@ abstract class Unit extends Buildable{
 	}
 
 	public function save($pdo,$worldId,$turn){
-		$pdo->query("INSERT INTO `units` (`id`, `game_id`,`civ_id`, `x`,`y`,`name`,`health`,`turn`) VALUES (NULL, '".$worldId."', '".$this->civ->id."','".$this->x."','".$this->y."','".$this->name."','".$this->health."','".$turn."');");
+		if ($this->civ != null){
+			$pdo->query(	"INSERT INTO `units` (`id`, `game_id`,`civ_id`, `x`,`y`,`name`,`health`,`turn`)
+										VALUES (NULL, '".$worldId."', '".$this->civ->id."','".$this->x."','".$this->y."','".$this->name."','".$this->health."','".$turn."');");
+		}
 	}
 
 	public function getActionsAvailable(){
