@@ -65,6 +65,7 @@ class Game {
     foreach ($this->civs as $civ){
     		$civ->turn();
     	}
+      var_dump($this);
   }
 
   public function techAvailable($civ){
