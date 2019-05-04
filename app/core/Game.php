@@ -116,8 +116,10 @@ class Game {
 
   public function save($pdo){
     if ($this->id == null){
-        $reply = $pdo->query("INSERT INTO `game` (`id`, `turn`, x, y) VALUES (NULL, '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
-        $this->id = $pdo->lastInsertId();
+      $reply = $pdo->query("INSERT INTO `game` (`id`, `turn`, x, y) VALUES (NULL, '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
+      $this->id = $pdo->lastInsertId();
+    }else{
+      $reply = $pdo->query("INSERT INTO `game` (`id`, `turn`, x, y) VALUES ('".$this->id."', '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
     }
     $this->world->save($pdo,$this->id,$this->turn);
     foreach ($this->civs as $key => $value) {
