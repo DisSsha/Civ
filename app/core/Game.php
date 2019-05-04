@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once ('World.php');
 require_once ('Civilization.php');
@@ -19,7 +19,7 @@ require_once ('models/buildings/Granary.php');
 require_once ('Render.php');
 
 class Game {
-  
+
   public $turn = 0;
   public $world ;
   public $civs =array();
@@ -47,21 +47,21 @@ class Game {
       "Granary"         => new Granary()
     );
   }
-  
+
   public function generateCivilization($number=2){
   	for ($i = 0 ; $i < $number ; $i++){
   		$this->civs[$i] = new Civilization($this);
   		$settler = new Settler();
       $settler->setCiv($this->civs[$i]);
   		$this->civs[$i]->addUnit($settler);
-  		$this->world->addUnit($settler);		
+  		$this->world->addUnit($settler);
   	}
   }
-  
+
   public function turn(){
   	//Natural Events
   	//Babarian moves
-  	$this->turn++;
+  	$this->turn = $this->turn++;
     foreach ($this->civs as $civ){
     		$civ->turn();
     	}
@@ -127,7 +127,7 @@ class Game {
       }catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage() . "<br/>";
         die();
-      }      
+      }
     }
   }
 
