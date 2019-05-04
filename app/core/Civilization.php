@@ -56,7 +56,7 @@ class Civilization {
     if(count($things) == 0){
       print "Error : can't choose($things) arg is empty !";
     }
-    return $things[0];
+    return reset($things);
   }
 
   public function techTurn(){
