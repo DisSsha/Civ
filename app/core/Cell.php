@@ -61,6 +61,7 @@ class Cell {
 		try{
 				$pdo->query("INSERT INTO `cells` (`id`, `game_id`,`turn`, `x`, `y`, `terrain`, `feature`, `bonus`) VALUES ('".$this->id."', '".$worldId."','".$turn."', '".$this->x."', '".$this->y."', '".$this->terrain->name."', '".$feature."', 'BONUSTODO') ON DUPLICATE KEY UPDATE;");
 		}catch PDOException $Exception ) {
+			 print "INSERT INTO `cells` (`id`, `game_id`,`turn`, `x`, `y`, `terrain`, `feature`, `bonus`) VALUES ('".$this->id."', '".$worldId."','".$turn."', '".$this->x."', '".$this->y."', '".$this->terrain->name."', '".$feature."', 'BONUSTODO') ON DUPLICATE KEY UPDATE;";
 			 throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
 		}
 
