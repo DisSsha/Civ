@@ -116,19 +116,14 @@ class Game {
 
   public function save($pdo){
     if ($this->id == null){
-      try{
         $reply = $pdo->query("INSERT INTO `game` (`id`, `turn`, x, y) VALUES (NULL, '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
         $this->id = $pdo->lastInsertId();
-        $this->world->save($pdo,$this->id,$this->turn);
-        foreach ($this->civs as $key => $value) {
-          $value->save($pdo,$this->id,$this->turn);
-        }
-        //TODO same with techList : cultree
-      }catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage() . "<br/>";
-        die();
-      }
     }
+    $this->world->save($pdo,$this->id,$this->turn);
+    foreach ($this->civs as $key => $value) {
+      $value->save($pdo,$this->id,$this->turn);
+    }
+    //TODO same with techList : cultree
   }
 
   public function loadLastTurn($pdo,$worldId){
