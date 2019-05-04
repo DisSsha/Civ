@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Cell {
 	private $x;
@@ -6,6 +6,7 @@ class Cell {
 	private $terrain;
 	private $feature;
 	private $units=null;
+	private $id = "NULL";
 	// Strategic, Bonus or Luxury
 	private $bonus;
 
@@ -29,7 +30,7 @@ class Cell {
 			$this->feature = new $featureAllowed[$randomFeat]();
 		}
 	}
-	
+
 	public function getFeature(){
 		return $this->feature;
 	}
@@ -46,7 +47,7 @@ class Cell {
 		}
 	}
 
-	// TODO handle unit per tile 
+	// TODO handle unit per tile
 	public function addUnit($unit){
 		$this->units = $unit;
 		$unit->setLocation($this->x,$this->y);
@@ -57,13 +58,14 @@ class Cell {
 		if ($this->feature != null){
 			$feature = $this->feature->name;
 		}
-		$pdo->query("INSERT INTO `cells` (`id`, `game_id`, `x`, `y`, `terrain`, `feature`, `bonus`) VALUES (NULL, '".$worldId."', '".$this->x."', '".$this->y."', '".$this->terrain->name."', '".$feature."', 'BONUSTODO');");
+		$pdo->query("INSERT INTO `cells` (`id`, `game_id`,`turn`, `x`, `y`, `terrain`, `feature`, `bonus`) VALUES ('".$this->id."', '".$worldId."','".$turn."', '".$this->x."', '".$this->y."', '".$this->terrain->name."', '".$feature."', 'BONUSTODO') ON DUPLICATE KEY UPDATE;");
 
 	}
 
 	public function load($pdo,$worldId,$turn){
-		$reply = $pdo->query("SELECT * from `cells` where x=".$this->x." AND y=".$this->y." AND game_id=".$worldId.";");
+		$reply = $pdo->query("SELECT * from `cells` where x=".$this->x." AND y=".$this->y." AND game_id=".$worldId." AND turn=".$turn.";");
 		$data = $reply->fetch();
+		$this->id = $data['id'];
 		$this->terrain = new $data['terrain'];
 		if ($data['feature'] != null)
 			$this->feature = new $data['feature'];

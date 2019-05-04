@@ -101,15 +101,6 @@ class Civilization {
     }
   }
 
-		/**
-			> Global to local
-			Tech
-			Cultural
-			Government
-			Cities turns
-				Building to make
-			Units turns
-		*/
 	public function turn(){
     $this->prepareTurn();
     $this->techTurn();
