@@ -58,6 +58,7 @@ class Cell {
 		if ($this->feature != null){
 			$feature = $this->feature->name;
 		}
+		print "INSERT INTO `cells` (`id`, `game_id`,`turn`, `x`, `y`, `terrain`, `feature`, `bonus`) VALUES ('".$this->id."', '".$worldId."','".$turn."', '".$this->x."', '".$this->y."', '".$this->terrain->name."', '".$feature."', 'BONUSTODO') ON DUPLICATE KEY UPDATE;";
 		$pdo->query("INSERT INTO `cells` (`id`, `game_id`,`turn`, `x`, `y`, `terrain`, `feature`, `bonus`) VALUES ('".$this->id."', '".$worldId."','".$turn."', '".$this->x."', '".$this->y."', '".$this->terrain->name."', '".$feature."', 'BONUSTODO') ON DUPLICATE KEY UPDATE;");
 
 	}
