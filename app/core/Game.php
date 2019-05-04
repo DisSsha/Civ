@@ -20,7 +20,7 @@ require_once ('Render.php');
 
 class Game {
 
-  public $turn = 0;
+  public $turn;
   public $world ;
   public $civs =array();
   public $techList;
@@ -29,6 +29,7 @@ class Game {
   public $id = null;
 
   public function __construct($x=10,$y=10){
+    $this->turn = 0;
 	  $this->render = new Render($this);
     $this->techList = array (
       "Pottery"         => new Pottery(),
@@ -61,7 +62,7 @@ class Game {
   public function turn(){
   	//Natural Events
   	//Babarian moves
-  	$this->turn = $this->turn++;
+  	$this->turn++;
     foreach ($this->civs as $civ){
     		$civ->turn();
     	}
