@@ -5,7 +5,7 @@ require_once ('core/City.php');
 
 
 class Civilization {
-	
+
 	//purpose
 	public $agenda;
 	public $Civbonus;
@@ -50,17 +50,17 @@ class Civilization {
 		$this->ongoingTechnology = $this->choose($AvailableTechnology);
 		$this->ongoingTechnology->startTurn = $this->game->turn;
   }
-  
+
   // take a list of object and return only one
   public function choose($things){// TODO choose base on traits
-    if(size($things) == 0){
+    if(count($things) == 0){
       print "Error : can't choose($things) arg is empty !";
     }
-    return $things[0]; 
+    return $things[0];
   }
 
   public function techTurn(){
-    if ($ongoingTechnology == null){  // First turn
+    if ($this->ongoingTechnology == null){  // First turn
       $this->pickTechnology();
     }
     $this->ongoingTechnology->cost -= ($this->turnScience);
@@ -79,7 +79,7 @@ class Civilization {
 		}
 		//add cost on units
   }
-	
+
 	public function pickJob($city){
 		$AvailableJob = $this->game->JobAvailable($this,$city);
 		$city->job = $this->choose($AvailableJob);
