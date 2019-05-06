@@ -1,5 +1,26 @@
 <?php
 
+namespace app\core;
+
+use \app\core\World;
+use \app\core\Civilization;
+
+use \app\models\units\Settler;
+
+use \app\models\techs\Pottery;
+use \app\models\techs\AnimalHusbandry;
+use \app\models\techs\Mining;
+use \app\models\techs\Sailing;
+use \app\models\techs\Astrology;
+use \app\models\techs\Archery;
+use \app\models\techs\Irrigation;
+use \app\models\techs\Writing;
+
+use \app\models\buildings\Granary;
+
+use \app\core\Render;
+
+/**
 require_once ('World.php');
 require_once ('Civilization.php');
 
@@ -17,6 +38,7 @@ require_once ('models/techs/Writing.php');
 require_once ('models/buildings/Granary.php');
 
 require_once ('Render.php');
+*/
 
 class Game {
 

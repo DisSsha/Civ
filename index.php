@@ -1,7 +1,12 @@
 <?php
 
-require_once ('core/Game.php');
-require_once ('utils/Database.php');
+require_once "vendor/autoload.php";
+
+use \app\utils\Database;
+use \app\core\Game;
+
+#require_once ('core/Game.php');
+#require_once ('utils/Database.php');
 
 if (isset ($_GET["clearall"])){
 	$pdo = Database::getInstance();

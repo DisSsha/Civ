@@ -1,7 +1,10 @@
 <?php
 
-require_once ('models/units/Settler.php');
-require_once ('core/City.php');
+use app\models\units\Settler;
+use app\core\City;
+
+# require_once ('models/units/Settler.php');
+# require_once ('core/City.php');
 
 
 class Civilization {

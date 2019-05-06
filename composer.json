@@ -4,6 +4,6 @@
     "type": "project",
     "require": {},
     "autoload": {
-      "psr-4" : {"App\\" : "App"}
+      "psr-4" : { "app\\" : "app"}
     }
 }

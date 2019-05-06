@@ -1,12 +1,14 @@
 <?php
 
-require_once ('Cell.php');
+use app\core\Cell;
+use app\models\terrains\Grassland;
+use app\models\features\Woods;
+use app\units\Settler;
 
-require_once ('models/terrains/Grassland.php');
-
-require_once ('models/features/Woods.php');
-
-require_once ('models/units/Settler.php');
+# require_once ('Cell.php');
+# require_once ('models/terrains/Grassland.php');
+# require_once ('models/features/Woods.php');
+# require_once ('models/units/Settler.php');
 
 class World {
 
