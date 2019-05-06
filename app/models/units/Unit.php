@@ -24,7 +24,8 @@ abstract class Unit extends Buildable{
 		$this->civ = $civ;
 	}
 
-	public function save($pdo,$worldId,$turn){
+	public function save($worldId,$turn){
+		$pdo = Database::getInstance();
 		if ($this->civ != null){
 			$pdo->query(	"INSERT INTO `units` (`id`, `game_id`,`civ_id`, `x`,`y`,`name`,`health`,`turn`)
 										VALUES (NULL, '".$worldId."', '".$this->civ->id."','".$this->x."','".$this->y."','".$this->name."','".$this->health."','".$turn."');");

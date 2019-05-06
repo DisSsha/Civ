@@ -115,36 +115,37 @@ class Game {
   	#generateBarabarian
   }
 
-  public function save($pdo){
+  public function save(){
+    $pdo = Database::getInstance();
     if ($this->id == null){
       $reply = $pdo->query("INSERT INTO `game` (`id`, `turn`, x, y) VALUES (NULL, '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
       $this->id = $pdo->lastInsertId();
     }else{
       $reply = $pdo->query("INSERT INTO `game` (`id`, `turn`, x, y) VALUES ('".$this->id."', '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
     }
-    $this->world->save($pdo,$this->id,$this->turn);
+    $this->world->save($this->id,$this->turn);
     foreach ($this->civs as $key => $value) {
-      $value->save($pdo,$this->id,$this->turn);
+      $value->save($this->id,$this->turn);
     }
     //TODO same with techList : cultree
   }
 
-  public function loadLastTurn($pdo,$worldId){
+  public function loadLastTurn($worldId){
+    $pdo = Database::getInstance();
     $reply = $pdo->query("SELECT turn from `game` where id=".$worldId." ORDER by turn DESC limit 1;");
     $data = $reply->fetch();
     $turn = $data["turn"];
-    $this->load($pdo,$worldId,$turn);
+    $this->load($worldId,$turn);
   }
 
-  public function load($pdo,$worldId,$turn){
+  public function load($worldId,$turn){
+    $pdo = Database::getInstance();
     $this->id = $worldId;
     $this->turn = $turn;
     $reply = $pdo->query("SELECT x,y from `game` where id=".$worldId." ;");
     $data = $reply->fetch();
-
     $this->world = new World($data["x"],$data['y']);
-    $this->world->load($pdo,$worldId,$turn);
-
+    $this->world->load($worldId,$turn);
     $reply = $pdo->query("SELECT * from `civs` where game_id=".$worldId." ;");
     $data = $reply->fetchAll();
     $i = 0;
@@ -152,7 +153,7 @@ class Game {
       $civ = new Civilization($this);
       $civ->id = $data[$key]["id"];
       $this->civs[$i] = $civ;
-      $this->civs[$i]->load($pdo,$this->id,$this->turn);
+      $this->civs[$i]->load($this->id,$this->turn);
       $i++;
     }
   }

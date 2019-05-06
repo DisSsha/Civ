@@ -110,22 +110,24 @@ class Civilization {
     $this->unitsTurn();
 	}
 
-	public function save($pdo,$worldId,$turn){
+	public function save($worldId,$turn){
+		$pdo = Database::getInstance();
 		if ($this->id == null){
 			$reply = $pdo->query("INSERT INTO `civs` (`id`, `game_id`) VALUES (NULL, '".$worldId."' );");
         	$this->id = $pdo->lastInsertId();
 		}
 		foreach ($this->units as $key => $value) {
-			$this->units[$key]->save($pdo,$worldId,$turn);
+			$this->units[$key]->save($worldId,$turn);
 		}
 		foreach ($this->cities as $key => $value){
-			$this->cities[$key]->save($pdo,$worldId,$turn);
+			$this->cities[$key]->save($worldId,$turn);
 		}
 		//save Civ state (gold, tech,etc)
 
 	}
 
-	public function load($pdo,$worldId,$turn){
+	public function load($worldId,$turn){
+		$pdo = Database::getInstance();
 		$reply = $pdo->query("SELECT * from `units` where civ_id=".$this->id." AND game_id=".$worldId.";");
 		$data = $reply->fetchAll();
 		foreach ($data as $key => $value) {

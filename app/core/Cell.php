@@ -53,26 +53,18 @@ class Cell {
 		$unit->setLocation($this->x,$this->y);
 	}
 
-	public function save($pdo,$worldId,$turn){
+	public function save($worldId,$turn){
+		$pdo = Database::getInstance();
 		$feature = null;
 		if ($this->feature != null){
 			$feature = $this->feature->name;
 		}
-<<<<<<< HEAD
 		print "INSERT INTO `cells` (`id`, `game_id`,`turn`, `x`, `y`, `terrain`, `feature`, `bonus`) VALUES ('".$this->id."', '".$worldId."','".$turn."', '".$this->x."', '".$this->y."', '".$this->terrain->name."', '".$feature."', 'BONUSTODO') ON DUPLICATE KEY UPDATE;";
 		$pdo->query("INSERT INTO `cells` (`id`, `game_id`,`turn`, `x`, `y`, `terrain`, `feature`, `bonus`) VALUES ('".$this->id."', '".$worldId."','".$turn."', '".$this->x."', '".$this->y."', '".$this->terrain->name."', '".$feature."', 'BONUSTODO') ON DUPLICATE KEY UPDATE;");
-=======
-		try{
-				$pdo->query("INSERT INTO `cells` (`id`, `game_id`,`turn`, `x`, `y`, `terrain`, `feature`, `bonus`) VALUES ('".$this->id."', '".$worldId."','".$turn."', '".$this->x."', '".$this->y."', '".$this->terrain->name."', '".$feature."', 'BONUSTODO') ON DUPLICATE KEY UPDATE;");
-		}catch PDOException $Exception ) {
-			 print "INSERT INTO `cells` (`id`, `game_id`,`turn`, `x`, `y`, `terrain`, `feature`, `bonus`) VALUES ('".$this->id."', '".$worldId."','".$turn."', '".$this->x."', '".$this->y."', '".$this->terrain->name."', '".$feature."', 'BONUSTODO') ON DUPLICATE KEY UPDATE;";
-			 throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-		}
->>>>>>> 2113473cb23c0cebdb4fdfb08050711f34df1b82
-
 	}
 
-	public function load($pdo,$worldId,$turn){
+	public function load($worldId,$turn){
+		$pdo = Database::getInstance();
 		$reply = $pdo->query("SELECT * from `cells` where x=".$this->x." AND y=".$this->y." AND game_id=".$worldId." AND turn=".$turn.";");
 		$data = $reply->fetch();
 		$this->id = $data['id'];

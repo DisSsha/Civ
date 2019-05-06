@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once ('Cell.php');
 
@@ -23,17 +23,17 @@ class World {
 		$this->unitList = array (
 									"Settler" => new Settler()
 							);
-		$this->terrainsList = array ( 
-										"Grassland" => new Grassland(), 
-									//	"Plains" 	=> new Plains(), 
-									//	"Desert" 	=> new Desert(), 
+		$this->terrainsList = array (
+										"Grassland" => new Grassland(),
+									//	"Plains" 	=> new Plains(),
+									//	"Desert" 	=> new Desert(),
 									//	"Snow" 		=> new Snow(),
-									//	"Coast" 	=> new Coast(), 
-									//	"Lake" 		=> new Lake(), 
-									//	"Ocean" 	=> new Ocean() 
+									//	"Coast" 	=> new Coast(),
+									//	"Lake" 		=> new Lake(),
+									//	"Ocean" 	=> new Ocean()
 									);
 
-		$this->featuresList = array ( 
+		$this->featuresList = array (
 										"Woods" 		=> new Woods(),
 									//	"Plains"		=> new Rainforest(),
 									//	"Marsh"			=> new Marsh(),
@@ -53,7 +53,7 @@ class World {
 		}
 	}
 
-	public function generateTerrain($type="random"){		
+	public function generateTerrain($type="random"){
 		if ($type == "random"){
 			$maxRand = sizeof($this->terrainsList)-1;
 			$keys = array_keys($this->terrainsList);
@@ -62,8 +62,8 @@ class World {
 					$index = $keys[rand(0,$maxRand)];
 					$this->grid[$i][$j]->setTerrain($this->terrainsList[$index]);
 				}
-			}		
-		}	
+			}
+		}
 	}
 
 	public function getCell($x,$y){
@@ -75,7 +75,7 @@ class World {
 			for ( $j = 0; $j < $this->y ; $j++){
 				$this->grid[$i][$j]->addFeature();
 			}
-		}			
+		}
 	}
 
 	public function generateBonus(){
@@ -90,21 +90,23 @@ class World {
 			$x = rand(0,$this->x-1);
 			$y = rand(0,$this->y-1);
 		}
-		$this->grid[$x][$y]->addUnit($unit);		
+		$this->grid[$x][$y]->addUnit($unit);
 	}
 
-	public function save($pdo,$worldId,$turn){
+	public function save($worldId,$turn){
+		$pdo = Database::getInstance();
 		for ( $i = 0 ; $i < $this->x ; $i++){
 			for ( $j = 0; $j < $this->y ; $j++){
-				$this->grid[$i][$j]->save($pdo,$worldId,$turn);
+				$this->grid[$i][$j]->save($worldId,$turn);
 			}
 		}
 	}
 
-	public function load($pdo,$worldId,$turn){
+	public function load($worldId,$turn){
+		$pdo = Database::getInstance();
 		for ( $i = 0 ; $i < $this->x ; $i++){
 			for ( $j = 0; $j < $this->y ; $j++){
-				$this->grid[$i][$j]->load($pdo,$worldId,$turn);
+				$this->grid[$i][$j]->load($worldId,$turn);
 			}
 		}
 	}
