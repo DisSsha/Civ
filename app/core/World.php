@@ -2,10 +2,10 @@
 
 namespace app\core;
 
-use app\core\Cell;
-use app\models\terrains\Grassland;
-use app\models\features\Woods;
-use app\models\units\Settler;
+use \app\core\Cell;
+use \app\models\terrains\Grassland;
+use \app\models\features\Woods;
+use \app\models\units\Settler;
 
 # require_once ('Cell.php');
 # require_once ('models/terrains/Grassland.php');
