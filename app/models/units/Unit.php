@@ -2,6 +2,7 @@
 
 namespace app\models\units;
 use \app\models\Buildable;
+use \app\utils\Database;
 # require ('models/Buildable.php');
 
 abstract class Unit extends Buildable{

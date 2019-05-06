@@ -20,6 +20,8 @@ use \app\models\buildings\Granary;
 
 use \app\core\Render;
 
+use \app\utils\Database;
+
 /**
 require_once ('World.php');
 require_once ('Civilization.php');

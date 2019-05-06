@@ -3,6 +3,7 @@
 namespace app\core;
 use app\models\units\Settler;
 use app\core\City;
+use \app\utils\Database;
 
 # require_once ('models/units/Settler.php');
 # require_once ('core/City.php');
@@ -135,7 +136,8 @@ class Civilization {
 		$reply = $pdo->query("SELECT * from `units` where civ_id=".$this->id." AND game_id=".$worldId.";");
 		$data = $reply->fetchAll();
 		foreach ($data as $key => $value) {
-			$unit = new $value["name"];
+			$classUnit = '\app\models\units\\'.$value["name"];
+			$unit = new $classUnit;
 			$unit->x = $value['x'];
 			$unit->y = $value['y'];
 			$this->addUnit($unit);

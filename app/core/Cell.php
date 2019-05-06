@@ -4,6 +4,7 @@
 namespace app\core;
 use \app\models\features\Woods;
 use \app\models\terrains\Grassland;
+use \app\utils\Database;
 
 class Cell {
 	private $x;
@@ -32,7 +33,8 @@ class Cell {
 		if (rand(0,100) > 75){
 			$featureAllowed = $this->terrain->featureAllowed;
 			$randomFeat = rand(0,sizeof($featureAllowed)-1);
-			$this->feature = new $featureAllowed[$randomFeat]();
+			$class = '\app\models\features\\'.$featureAllowed[$randomFeat];
+			$this->feature = new $class();
 		}
 	}
 
@@ -73,9 +75,12 @@ class Cell {
 		$reply = $pdo->query("SELECT * from `cells` where x=".$this->x." AND y=".$this->y." AND game_id=".$worldId." AND turn=".$turn.";");
 		$data = $reply->fetch();
 		$this->id = $data['id'];
-		$this->terrain = new $data['terrain'];
-		if ($data['feature'] != null)
-			$this->feature = new $data['feature'];
+		$classTerrain = '\app\models\terrains\\'.$data['terrain'];
+		$this->terrain = new $classTerrain();
+		if ($data['feature'] != null){
+			$classFeature = '\app\models\features\\'.$data['feature'];
+			$this->feature = new $classFeature();
+		}
 
 	}
 }
