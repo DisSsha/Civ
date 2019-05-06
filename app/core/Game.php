@@ -4,6 +4,7 @@ namespace app\core;
 
 use \app\core\World;
 use \app\core\Civilization;
+use \app\core\Render;
 
 use \app\models\units\Settler;
 
@@ -18,29 +19,7 @@ use \app\models\techs\Writing;
 
 use \app\models\buildings\Granary;
 
-use \app\core\Render;
-
 use \app\utils\Database;
-
-/**
-require_once ('World.php');
-require_once ('Civilization.php');
-
-require_once ('models/units/Settler.php');
-
-require_once ('models/techs/Pottery.php');
-require_once ('models/techs/AnimalHusbandry.php');
-require_once ('models/techs/Mining.php');
-require_once ('models/techs/Sailing.php');
-require_once ('models/techs/Astrology.php');
-require_once ('models/techs/Archery.php');
-require_once ('models/techs/Irrigation.php');
-require_once ('models/techs/Writing.php');
-
-require_once ('models/buildings/Granary.php');
-
-require_once ('Render.php');
-*/
 
 class Game {
 
@@ -102,7 +81,8 @@ class Game {
     $unlocked = array_keys($civ->unlockedTechnologies);
     foreach ($this->techList as $techname => $techObj){
       if ( !in_array($techname,$unlocked) && $techObj->satisfy($unlocked)){
-        $reply[$techname] = new $techname();
+        $classtech = '\app\models\techs\\'.$techname;
+        $reply[$techname] = new $classtech();
       }
     }
     return $reply;
@@ -114,12 +94,14 @@ class Game {
     $built = array_keys($city->building);
     foreach($this->unitList as $unitname => $unitObj){
       if($unitObj->satisfy($unlocked)){
-        $reply[$unitname] = new $unitname();
+        $classunit = '\app\models\units\\'.$unitname;
+        $reply[$unitname] = new $classunit();
       }
     }
     foreach($this->buildingList as $buildingname => $buildingObj){
       if($buildingObj->satisfy($unlocked) && !in_array($buildingname,$built)){// TODO add condition for required infrastructures
-        $reply[$buildingname] = new $buildingname();
+        $classbuilding = '\app\models\buildings\\'.$buildingname;
+        $reply[$buildingname] = new $classbuilding();
       }
     }
     return $reply;
