@@ -38,7 +38,7 @@ class World {
 									);
 
 		$this->featuresList = array (
-										"Woods" 		=> new Woods(),
+										"Woods" 		=> new Woods()
 									//	"Plains"		=> new Rainforest(),
 									//	"Marsh"			=> new Marsh(),
 									//	"Floodplains" 	=> new Floodplains(),
