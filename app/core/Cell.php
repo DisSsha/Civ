@@ -1,6 +1,9 @@
 <?php
 
+
 namespace app\core;
+use \app\features\Woods;
+use \app\terrains\Grassland;
 
 class Cell {
 	private $x;
