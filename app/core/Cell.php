@@ -2,8 +2,8 @@
 
 
 namespace app\core;
-use \app\features\Woods;
-use \app\terrains\Grassland;
+use \app\models\features\Woods;
+use \app\models\terrains\Grassland;
 
 class Cell {
 	private $x;
