@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models\techs;
 use \app\models\techs\Technology;
 

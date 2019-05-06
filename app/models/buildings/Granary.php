@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models\buildings;
-use \app\models\Building;
+use \app\models\buildings\Building;
 #require_once('Building.php');
 
 class Granary extends Building {
