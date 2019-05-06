@@ -1,0 +1,9 @@
+{
+    "name": "dish/civ",
+    "description": "Civilization sim",
+    "type": "project",
+    "require": {},
+    "autoload": {
+      "psr-4" : {"App\\" : "App"}
+    }
+}
