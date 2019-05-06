@@ -1,5 +1,6 @@
 <?php
-require_once ('Technology.php');
+namespace app\models\techs;
+use \app\models\techs\Technology;
 
 Class Irrigation extends Technology{
 

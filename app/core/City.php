@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+namespace app\core;
 
 class City {
 

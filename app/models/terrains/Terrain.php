@@ -1,5 +1,8 @@
 <?php
 
+namespace app\models\terrains;
+
+
 abstract class Terrain {
 	public $name;
 	public $featureAllowed;

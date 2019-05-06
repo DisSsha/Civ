@@ -1,8 +1,11 @@
-<?php 
+<?php
 
-require_once('Unit.php');
-require_once('models/actions/Move.php');
 
+namespace app\models\units;
+use \app\models\units\Unit;
+use \app\models\actions\Move;
+#require_once('models/actions/Move.php');
+#require_once('Unit.php');
 
 class Settler extends Unit {
 
@@ -15,5 +18,5 @@ class Settler extends Unit {
 	public function __construct(){
 		$this->actions = new Move();
 	}
-	
+
 }

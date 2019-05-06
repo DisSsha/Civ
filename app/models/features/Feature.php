@@ -1,5 +1,7 @@
 <?php
 
+namespace app\models\features;
+
 abstract class Feature {
 
 	public $name;

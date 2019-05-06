@@ -1,8 +1,8 @@
 <?php
 
 namespace app\models\techs;
-
 use \app\models\Buildable;
+
 #require_once ('models/Buildable.php');
 
 abstract class Technology extends Buildable{

@@ -1,5 +1,7 @@
 <?php
 
+namespace app\core;
+
 use app\core\Cell;
 use app\models\terrains\Grassland;
 use app\models\features\Woods;

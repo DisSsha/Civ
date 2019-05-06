@@ -1,6 +1,8 @@
-<?php 
+<?php
 
-require_once('Building.php');
+namespace app\models\buildings;
+use \app\models\Building;
+#require_once('Building.php');
 
 class Granary extends Building {
 
@@ -10,5 +12,5 @@ class Granary extends Building {
     public $img = "granary.png";
     public $bonus = array("Food"=> 1,"Housing"=> 2);
     public $prerequisites = array("Pottery");
-	
+
 }

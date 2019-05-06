@@ -1,6 +1,8 @@
 <?php
 
-require_once ('models/Buildable.php');
+namespace app\models\buildings;
+use \app\models\Buildable;
+# require_once ('models/Buildable.php');
 
 abstract class Building extends Buildable{
 

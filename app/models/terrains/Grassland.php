@@ -1,5 +1,8 @@
 <?php
 
+namespace app\models\terrains;
+use \app\models\terrains\Terrain;
+
 require_once ('Terrain.php');
 
 class Grassland extends Terrain{
@@ -17,7 +20,7 @@ class Grassland extends Terrain{
 								"X",
 								"Z"
 							);
-	
+
 	public $img = "grassland.jpg";
 
 }

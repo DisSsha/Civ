@@ -1,6 +1,8 @@
 <?php
 
-require ('models/Buildable.php');
+namespace app\models\units;
+use \app\models\Buildable;
+# require ('models/Buildable.php');
 
 abstract class Unit extends Buildable{
 

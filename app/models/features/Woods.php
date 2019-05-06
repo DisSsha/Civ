@@ -1,6 +1,9 @@
-<?php 
+<?php
 
-require_once ('Feature.php');
+namespace app\models\features;
+use \app\models\features\Feature;
+
+# require_once ('Feature.php');
 
 class Woods extends Feature {
 

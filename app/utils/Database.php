@@ -1,4 +1,7 @@
 <?php
+
+namespace app\utils;
+
 class Database {
 
     public static $instance = null;
