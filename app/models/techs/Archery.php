@@ -5,6 +5,5 @@ use \app\models\techs\Technology;
 Class Archery extends Technology{
     public $cost = 50;
     public $prerequisites = array("AnimalHusbandry");
-    public $name = "Archery";
-    public $img = "Archery.png";
+  
 }

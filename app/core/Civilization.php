@@ -25,14 +25,6 @@ class Civilization {
   public $turnScience   = 0;
   public $turnCultural  = 0;
   public $turnGold      = 0;
-
-	/** Name
-		inherit bonus (2)
-		Military cards
-		Economic cards
-		Diplomatic cards
-		Wild cards
-	*/
 	public $government;
 	public $unlockedCards;
 	public $unlockedGovernment;
@@ -41,6 +33,7 @@ class Civilization {
 	public function __construct($game){
 		$this->game = $game;
 	}
+
 	public function addUnit($unit){
 		$this->units[] = $unit;
 		$unit->setCiv = $this;
@@ -51,7 +44,6 @@ class Civilization {
 		$this->ongoingTechnology = $this->choose($AvailableTechnology);
 		$this->ongoingTechnology->startTurn = $this->game->turn;
   }
-
   // take a list of object and return only one
   public function choose($things){// TODO choose base on traits
     if(count($things) == 0){
@@ -85,7 +77,7 @@ class Civilization {
 		$AvailableJob = $this->game->JobAvailable($this,$city);
 		$city->job = $this->choose($AvailableJob);
 		$city->job->startTurn = $this->game->turn;
-}
+	}
 
   public function citiesTurn(){
     foreach ($this->cities as $name => $city){

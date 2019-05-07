@@ -12,7 +12,13 @@ abstract class Technology extends Buildable{
     public $endTurn;
     public $startTurn;
     public $prerequisites = array();
+    public $name;
+    public $img;
 
+    public function __construct(){
+  			$this->name = get_class($this);
+        $this->img = strtolower(get_class($this)).'.png';
+    }
 
     //public $eureka condition
 }
