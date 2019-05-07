@@ -123,8 +123,10 @@ class Game {
 
   public function getLogs(){
     $pdo = Database::getInstance();
-    $reply = $pdo->query("SELECT * from `logs` where turn=".$this->id." AND game_id=".$worldId.";");
-    $data = $reply->fetch();
+    $req = "SELECT * from `logs` where turn=".$this->turn." AND game_id=".$this->id.";";
+    $reply = $pdo->query($req);
+    $data = $reply->fetchAll();
+    return $data;
   }
 
   // Save the current state of the game

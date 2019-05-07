@@ -21,14 +21,15 @@ class Render {
 	}
 
 	public function generateLogs(){
-		$html .= "\t\t<div class=\"logs\">\n";
+		$html = "\t\t<div class=\"logs\">\n";
 		$logs = $this->game->getLogs();
 		$html .= "\t\t<table>\n";
 		foreach ($logs as $key => $value){
 			$html .= "\t\t<tr><td>$value->message</td></tr>\n";
 		}
+		$html .= "\t\t</table>\n";
 		$html .= "\t\t</div>\n";
-
+		return $html;
 	}
 
 	public function generateCSS(){
@@ -75,7 +76,7 @@ class Render {
 	}
 
 	public function generateFooter(){
-		$html .= "\t</body>\n";
+		$html = "\t</body>\n";
 		$html .= "</html>";
 		return $html;
 	}
@@ -106,7 +107,7 @@ class Render {
 				$html.= "\t\t\t<div class=\"tile ".$terrain."\" style=\"display:grid\">".$featureImg." ".$unitImg."</div>\n";
 			}
 		}
-		$html = "\t\t</div>\n";
+		$html .= "\t\t</div>\n";
 		$html .= $this->generateLogs();
 		$html .= $this->generateFooter();
 		return $html;

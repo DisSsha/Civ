@@ -4,7 +4,7 @@ namespace app\utils;
 
 class Logger {
 
-    public static function CivEvent(Civilization $civ,  $type, $obj) {
+    public static function CivEvent($civ,  $type, $obj) {
       $pdo = Database::getInstance();
       if ($type == "tech"){
         $stmt = $pdo->prepare ('
