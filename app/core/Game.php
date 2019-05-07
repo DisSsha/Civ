@@ -120,9 +120,14 @@ class Game {
   	$this->generateCivilization();
   	#generateBarabarian
   }
-  /*
-  *
-  */
+
+  public function getLogs(){
+    $pdo = Database::getInstance();
+    $reply = $pdo->query("SELECT * from `logs` where turn=".$this->id." AND game_id=".$worldId.";");
+    $data = $reply->fetch();
+  }
+
+  // Save the current state of the game
   public function save(){
     $pdo = Database::getInstance();
     $stmt = $pdo->prepare ('

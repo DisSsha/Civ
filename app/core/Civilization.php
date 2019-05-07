@@ -4,6 +4,7 @@ namespace app\core;
 use app\models\units\Settler;
 use app\core\City;
 use \app\utils\Database;
+use \app\utils\Logger;
 
 class Civilization {
 
@@ -42,6 +43,7 @@ class Civilization {
   public function pickTechnology(){
     $AvailableTechnology = $this->game->techAvailable($this);
 		$this->ongoingTechnology = $this->choose($AvailableTechnology);
+		Logger::CivEvent($this,"tech",$this->ongoingTechnology);
 		$this->ongoingTechnology->startTurn = $this->game->turn;
   }
   // take a list of object and return only one

@@ -20,6 +20,17 @@ class Render {
 		return $html;
 	}
 
+	public function generateLogs(){
+		$html .= "\t\t<div class=\"logs\">\n";
+		$logs = $this->game->getLogs();
+		$html .= "\t\t<table>\n";
+		foreach ($logs as $key => $value){
+			$html .= "\t\t<tr><td>$value->message</td></tr>\n";
+		}
+		$html .= "\t\t</div>\n";
+
+	}
+
 	public function generateCSS(){
 		$css = "\t\t<style>\n";
 		$css .= "\t\t\t.container {\n";
@@ -31,10 +42,14 @@ class Render {
 		$css .= "\t\t\tbody {\n";
 		$css .= "\t\t\t\tdisplay: grid;\n";
 		$css .= "\t\t\t\tgrid-template-columns: 10% 90%;\n";
-		$css .= "\t\t\t\tgrid-template-areas: \"sidebar container\";\n";
+		$css .= "\t\t\t\tgrid-template-areas: \"sidebar container\"\n";
+		$css .= "\t\t\t\t \"logs\";\n";
 		$css .= "\t\t\t}\n";
 		$css .= "\t\t\t.sidebar {\n";
 		$css .= "\t\t\tgrid-area: sidebar\n";
+		$css .= "\t\t\t}\n";
+		$css .= "\t\t\t.logs {\n";
+		$css .= "\t\t\tgrid-area: logs\n";
 		$css .= "\t\t\t}\n";
 		foreach ($this->world->terrainsList as $key => $value ){
 			$css .= "\t\t\t.".$value->name." {\n";
@@ -60,7 +75,6 @@ class Render {
 	}
 
 	public function generateFooter(){
-		$html = "\t\t</div>\n";
 		$html .= "\t</body>\n";
 		$html .= "</html>";
 		return $html;
@@ -92,6 +106,8 @@ class Render {
 				$html.= "\t\t\t<div class=\"tile ".$terrain."\" style=\"display:grid\">".$featureImg." ".$unitImg."</div>\n";
 			}
 		}
+		$html = "\t\t</div>\n";
+		$html .= $this->generateLogs();
 		$html .= $this->generateFooter();
 		return $html;
 	}
