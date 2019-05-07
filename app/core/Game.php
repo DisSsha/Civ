@@ -120,20 +120,33 @@ class Game {
   	$this->generateCivilization();
   	#generateBarabarian
   }
-
+  /*
+  *
+  */
   public function save(){
     $pdo = Database::getInstance();
+    $stmt = $pdo->prepare ('
+              INSERT INTO games
+                (id, turn, x, y)
+              VALUES
+                (:id, :turn, :x, :y)
+      ');
+    $stmt->bindParam(':id',$this->id);
+    $stmt->bindParam(':turn',$this->turn);
+    $stmt->bindParam(':x',$this->world->x);
+    $stmt->bindParam(':y',$this->world->y);
+    $reply = $stmt->execute();
+    if (!$reply){
+      //log something here
+      die('Impossible to save Game');
+    }
     if ($this->id == null){
-      $reply = $pdo->query("INSERT INTO `games` (`id`, `turn`, x, y) VALUES (NULL, '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
-      $this->id = $pdo->lastInsertId();
-    }else{
-      $reply = $pdo->query("INSERT INTO `games` (`id`, `turn`, x, y) VALUES ('".$this->id."', '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
+        $this->id = $pdo->lastInsertId();
     }
     $this->world->save($this->id,$this->turn);
     foreach ($this->civs as $key => $value) {
       $value->save($this->id,$this->turn);
     }
-    //TODO same with techList : cultree
   }
 
   public function loadLastTurn($worldId){
