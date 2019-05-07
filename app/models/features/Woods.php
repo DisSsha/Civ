@@ -7,5 +7,11 @@ use \app\models\features\Feature;
 
 class Woods extends Feature {
 
+	public function __construct(){
+		$this->baseYield(rray(
+			'food' => 2,
+			'production' => 2
+		));
+	}
 
 }
