@@ -124,10 +124,10 @@ class Game {
   public function save(){
     $pdo = Database::getInstance();
     if ($this->id == null){
-      $reply = $pdo->query("INSERT INTO `game` (`id`, `turn`, x, y) VALUES (NULL, '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
+      $reply = $pdo->query("INSERT INTO `games` (`id`, `turn`, x, y) VALUES (NULL, '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
       $this->id = $pdo->lastInsertId();
     }else{
-      $reply = $pdo->query("INSERT INTO `game` (`id`, `turn`, x, y) VALUES ('".$this->id."', '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
+      $reply = $pdo->query("INSERT INTO `games` (`id`, `turn`, x, y) VALUES ('".$this->id."', '".$this->turn."','".$this->world->x."','".$this->world->y."' );");
     }
     $this->world->save($this->id,$this->turn);
     foreach ($this->civs as $key => $value) {
@@ -138,7 +138,7 @@ class Game {
 
   public function loadLastTurn($worldId){
     $pdo = Database::getInstance();
-    $reply = $pdo->query("SELECT turn from `game` where id=".$worldId." ORDER by turn DESC limit 1;");
+    $reply = $pdo->query("SELECT turn from `games` where id=".$worldId." ORDER by turn DESC limit 1;");
     $data = $reply->fetch();
     $turn = $data["turn"];
     $this->load($worldId,$turn);
@@ -148,7 +148,7 @@ class Game {
     $pdo = Database::getInstance();
     $this->id = $worldId;
     $this->turn = $turn;
-    $reply = $pdo->query("SELECT x,y from `game` where id=".$worldId." ;");
+    $reply = $pdo->query("SELECT x,y from `games` where id=".$worldId." ;");
     $data = $reply->fetch();
     $this->world = new World($data["x"],$data['y']);
     $this->world->load($worldId,$turn);
