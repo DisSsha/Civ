@@ -25,7 +25,7 @@ class Render {
 		$logs = $this->game->getLogs();
 		$html .= "\t\t<table>\n";
 		foreach ($logs as $key => $value){
-			$html .= "\t\t<tr><td>$value->message</td></tr>\n";
+			$html .= "\t\t<tr><td>".$value['message']."</td></tr>\n";
 		}
 		$html .= "\t\t</table>\n";
 		$html .= "\t\t</div>\n";
@@ -44,7 +44,7 @@ class Render {
 		$css .= "\t\t\t\tdisplay: grid;\n";
 		$css .= "\t\t\t\tgrid-template-columns: 10% 90%;\n";
 		$css .= "\t\t\t\tgrid-template-areas: \"sidebar container\"\n";
-		$css .= "\t\t\t\t \"logs\";\n";
+		$css .= "\t\t\t\t \"logs logs\";\n";
 		$css .= "\t\t\t}\n";
 		$css .= "\t\t\t.sidebar {\n";
 		$css .= "\t\t\tgrid-area: sidebar\n";

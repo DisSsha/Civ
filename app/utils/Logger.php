@@ -13,8 +13,8 @@ class Logger {
                   VALUES
                     (:game_id, :turn, :civ, :type, :message)
           ');
-        $stmt->bindParam(':game_id',$civ->game->turn);
-        $stmt->bindParam(':turn',$civ->game->id);
+        $stmt->bindParam(':turn',$civ->game->turn);
+        $stmt->bindParam(':game_id',$civ->game->id);
         $stmt->bindParam(':civ',$civ->id);
         $stmt->bindParam(':type',$type);
         $message = "started a new research $obj->name";
