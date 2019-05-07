@@ -7,11 +7,11 @@ use \app\models\features\Feature;
 
 class Woods extends Feature {
 
-	public function __construct(){
-		$this->baseYield(rray(
+	public function init(){
+		$this->baseYield = array(
 			'food' => 2,
 			'production' => 2
-		));
+		);
 	}
 
 }
