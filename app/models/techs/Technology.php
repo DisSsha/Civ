@@ -16,8 +16,8 @@ abstract class Technology extends Buildable{
     public $img;
 
     public function __construct(){
-	$this->name = get_class($this);
-        $this->img = strtolower(get_class($this)).'.png';
+      $this->name = (new \ReflectionClass($this))->getShortName();
+			$this->img = strtolower($this->name).'.png';
     }
 
     //public $eureka condition
