@@ -7,7 +7,5 @@ use \app\models\features\Feature;
 
 class Woods extends Feature {
 
-	public $img = "woods.png";
-	public $name = "Woods";
 
 }
