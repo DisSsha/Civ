@@ -14,6 +14,7 @@ abstract class Feature {
 			$this->name = (new \ReflectionClass($this))->getShortName();
 			$this->img = strtolower($this->name)).'.png';
 			$this->init();
+			
 	}
 
 	public function init();
