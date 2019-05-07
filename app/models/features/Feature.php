@@ -12,8 +12,6 @@ abstract class Feature {
 
 	public function __construct(){
 			$this->name = (new \ReflectionClass($this))->getShortName();
-			var_dump((new \ReflectionClass($this))->getShortName());
-			exit();
-			$this->img = strtolower(get_class($this)).'.png';
+			$this->img = strtolower($this->name)).'.png';
 	}
 }
