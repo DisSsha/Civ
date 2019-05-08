@@ -23,7 +23,7 @@ class Render {
 
 	public function generateLogs(){
 		$html = "\t\t<div class=\"logs\">\n";
-		$logs = Logger::getLogs($game->id);
+		$logs = Logger::getLogs($this->game->id);
 		var_dump($logs);
 		$html .= "\t\t<table>\n";
 		foreach ($logs as $key => $value){
