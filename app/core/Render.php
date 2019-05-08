@@ -1,6 +1,7 @@
 <?php
 
 namespace app\core;
+use \app\utils\Logger;
 
 class Render {
 
@@ -22,7 +23,8 @@ class Render {
 
 	public function generateLogs(){
 		$html = "\t\t<div class=\"logs\">\n";
-		$logs = $this->game->getLogs();
+		$logs = Logger::getLogs($game->id);
+		var_dump($logs);
 		$html .= "\t\t<table>\n";
 		foreach ($logs as $key => $value){
 			$html .= "\t\t<tr><td>".$value['message']."</td></tr>\n";

@@ -121,14 +121,6 @@ class Game {
   	#generateBarabarian
   }
 
-  public function getLogs(){
-    $pdo = Database::getInstance();
-    $req = "SELECT * from `logs` where turn=".$this->turn." AND game_id=".$this->id.";";
-    $reply = $pdo->query($req);
-    $data = $reply->fetchAll();
-    return $data;
-  }
-
   // Save the current state of the game
   public function save(){
     $pdo = Database::getInstance();

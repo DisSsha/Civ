@@ -22,4 +22,12 @@ class Logger {
         $reply = $stmt->execute();
       }
     }
+
+    public static function getLogs($game_id){
+      $pdo = Database::getInstance();
+      $req = "SELECT * from `logs` where game_id=".$game_id." ORDER by turn,civ,type DESC;";
+      $reply = $pdo->query($req);
+      $data = $reply->fetchAll();
+      return $data;
+    }
 }
